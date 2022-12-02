@@ -1,8 +1,13 @@
-#ifndef luchador.h
-#define luchador.h
-#ifndef enemigo.h
-#define enemigo.h
+/*
+ * Proyecto Juego
+ * A01705550
+ * 2/12/2022
+ */
+#ifndef LUCHADOR_H
+#define LUCHADOR_H
+
 #include<iostream>
+
 using namespace std;
 
 class Luchador{
@@ -10,16 +15,17 @@ class Luchador{
 	private:
 		int hp;
 		int atk;
+		int mana;
 		string nombre;
 
-
 	public:
-		Luchador(int vida, int ataque, string nom){
-			hp = vida;
-			atk = ataque;
+		Luchador(int vid, int atak, int man, string nom){
+			hp = vid;
+			atk = atak;
+			mana = man;
 			nombre = nom;
 		}
-
+//getters
 		int getHp(){
 			return hp;
 		}
@@ -28,55 +34,34 @@ class Luchador{
 			return atk;
 		}
 
-		string getNombre(){
+		int getMana(){
+			return mana;
+		}
+
+		string getNom(){
 			return nombre;
 		}
+//setters
+        void setHp(int x){
+			hp = x;
+		}
 
-		void menosHp(int dmg){
-            hp = hp - dmg;
+		void setMana(int x){
+			mana = x;
+		}
+
+		void menosVida(int x){
+			hp = hp - x;
+
+		}
+//accion para subir su hp
+		void curar(){
+		    if(getMana() >= 10){
+                setHp(getHp() + 10);
+                setMana(getMana() - 10);
+		    }
         }
 
-        void setHp(int num){
-            hp = num;
-        }
-
-		void atk(int dmg, Enemigo &b){
-			 b.menosHp(dmg);
-		}
-
 };
 
-class Caballero: public Luchador{
-    public:
-		Caballero(string nom): Luchador(100, 10, nom){
-		}
-
-		void crit(Enemigo &b){
-			b.menosHp(20);
-		}
-};
-
-class Curandero: public Luchador{
-    public:
-		Curandero(string nom): Luchador(100, 10, nom){
-		}
-
-		void curarMax(){
-			Curandero.setHp(100);
-		}
-};
-
-class Alquimista: public Luchador{
-    public:
-		Alquimista(string nom): Luchador(100, 10, nom){
-		}
-
-		void masPociones(){
-			cout << "worales tienes mas pociones";
-		}
-};
-
-
-
-#endif
 #endif

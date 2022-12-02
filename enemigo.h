@@ -1,36 +1,53 @@
-#ifndef enemigo.h
-#define enemigo.h
-#ifndef luchador.h
-#define luchador.h
+/*
+ * Proyecto Juego
+ * A01705550
+ * 2/12/2022
+ */
+#ifndef ENEMIGO_H
+#define ENEMIGO_H
+
 #include<iostream>
+#include "luchador.h"
+
 using namespace std;
 
+//clase enemigo, sin herencia
 class Enemigo{
 
 	private:
 		int hp;
 		int atk;
+		string nombre;
 
 	public:
-		Enemigo(int vida, int ataque){
-			hp = vida;
-			atk = ataque;
+		Enemigo(int vid, int atak, string nom){
+			hp = vid;
+			atk = atak;
+			nombre = nom;
 		}
 
+//getters
 		int getHp(){
 			return hp;
 		}
 
-		void menosHp(int dmg){
-            hp = hp - dmg;
-        }
-
-		void atk(Luchador &b){
-			 b.menosHp(atk);
+		int getAtk(){
+			return atk;
 		}
 
+		string getNom(){
+			return nombre;
+		}
 
+//setter para cuando le hacen daño
+		void menosVida(int x){
+			hp = hp - x;
+		}
+
+//atacar a un luchador
+		void atacar(Luchador &p){
+			p.menosVida(getAtk());
+		}
 };
 
-#endif
 #endif
